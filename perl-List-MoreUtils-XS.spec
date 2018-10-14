@@ -4,25 +4,35 @@
 #
 Name     : perl-List-MoreUtils-XS
 Version  : 0.428
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-XS-0.428.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-XS-0.428.tar.gz
 Summary  : 'Provide the stuff missing in List::Util in XS'
 Group    : Development/Tools
 License  : Apache-2.0
-Requires: perl-List-MoreUtils-XS-lib
-Requires: perl-List-MoreUtils-XS-license
-Requires: perl-List-MoreUtils-XS-man
+Requires: perl-List-MoreUtils-XS-lib = %{version}-%{release}
+Requires: perl-List-MoreUtils-XS-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 # NAME
 List::MoreUtils::XS - Provide compiled List::MoreUtils functions
 # SYNOPSIS
 
+%package dev
+Summary: dev components for the perl-List-MoreUtils-XS package.
+Group: Development
+Requires: perl-List-MoreUtils-XS-lib = %{version}-%{release}
+Provides: perl-List-MoreUtils-XS-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-List-MoreUtils-XS package.
+
+
 %package lib
 Summary: lib components for the perl-List-MoreUtils-XS package.
 Group: Libraries
-Requires: perl-List-MoreUtils-XS-license
+Requires: perl-List-MoreUtils-XS-license = %{version}-%{release}
 
 %description lib
 lib components for the perl-List-MoreUtils-XS package.
@@ -34,14 +44,6 @@ Group: Default
 
 %description license
 license components for the perl-List-MoreUtils-XS package.
-
-
-%package man
-Summary: man components for the perl-List-MoreUtils-XS package.
-Group: Default
-
-%description man
-man components for the perl-List-MoreUtils-XS package.
 
 
 %prep
@@ -69,13 +71,13 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-List-MoreUtils-XS
-cp LICENSE %{buildroot}/usr/share/doc/perl-List-MoreUtils-XS/LICENSE
-cp t/LICENSE %{buildroot}/usr/share/doc/perl-List-MoreUtils-XS/t_LICENSE
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-List-MoreUtils-XS
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-List-MoreUtils-XS/LICENSE
+cp t/LICENSE %{buildroot}/usr/share/package-licenses/perl-List-MoreUtils-XS/t_LICENSE
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -84,17 +86,17 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/List/MoreUtils/XS.pm
+/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/List/MoreUtils/XS.pm
+
+%files dev
+%defattr(-,root,root,-)
+/usr/share/man/man3/List::MoreUtils::XS.3
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/auto/List/MoreUtils/XS/XS.so
+/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/auto/List/MoreUtils/XS/XS.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-List-MoreUtils-XS/LICENSE
-/usr/share/doc/perl-List-MoreUtils-XS/t_LICENSE
-
-%files man
-%defattr(-,root,root,-)
-/usr/share/man/man3/List::MoreUtils::XS.3
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-List-MoreUtils-XS/LICENSE
+/usr/share/package-licenses/perl-List-MoreUtils-XS/t_LICENSE
