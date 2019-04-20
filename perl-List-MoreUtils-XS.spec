@@ -4,10 +4,10 @@
 #
 Name     : perl-List-MoreUtils-XS
 Version  : 0.428
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-XS-0.428.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-XS-0.428.tar.gz
-Summary  : 'Provide the stuff missing in List::Util in XS'
+Summary  : Provide the stuff missing in List::Util
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: perl-List-MoreUtils-XS-lib = %{version}-%{release}
@@ -24,6 +24,7 @@ Summary: dev components for the perl-List-MoreUtils-XS package.
 Group: Development
 Requires: perl-List-MoreUtils-XS-lib = %{version}-%{release}
 Provides: perl-List-MoreUtils-XS-devel = %{version}-%{release}
+Requires: perl-List-MoreUtils-XS = %{version}-%{release}
 
 %description dev
 dev components for the perl-List-MoreUtils-XS package.
