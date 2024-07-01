@@ -5,7 +5,7 @@
 #
 Name     : perl-List-MoreUtils-XS
 Version  : 0.430
-Release  : 27
+Release  : 28
 URL      : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-XS-0.430.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-XS-0.430.tar.gz
 Summary  : 'Provide the stuff missing in List::Util in XS'
